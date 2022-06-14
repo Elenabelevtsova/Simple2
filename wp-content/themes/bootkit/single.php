@@ -2,7 +2,7 @@
 get_header();?>
 <!-- Page Content -->
 <div class="container">
-    <h1>xcxc</h1> <!-- Marketing Icons Section -->
+    <h1>Group</h1> <!-- Marketing Icons Section -->
     <div class="row">
         <!-- Post Content Column -->
         <div class="col-lg-8">
