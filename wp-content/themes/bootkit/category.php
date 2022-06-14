@@ -1,5 +1,6 @@
 <?php get_header("v2");?>
-<?php$categories = get_terms('category', 'orderby=name&hide_empty=0');
+<?php
+$categories = get_terms('category', 'orderby=name&hide_empty=0');
       if ($categories) {
             echo '<ul>';
             foreach ($categories as $cat) {
