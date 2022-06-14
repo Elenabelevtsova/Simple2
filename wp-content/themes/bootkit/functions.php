@@ -11,6 +11,8 @@ include get_theme_file_path('includes/widgets.php');
 include get_theme_file_path('includes/theme-customizer.php');
 include get_theme_file_path('includes/customizer/social.php');
 include get_theme_file_path('includes/customizer/misc.php');
+include get_theme_file_path('includes/taxonomies.php');
+include get_theme_file_path('includes/custom-post-types.php');
 
 /**
  * Include Kirki сustomizer.
@@ -23,6 +25,8 @@ add_action('after_setup_theme', 'bootkit_setup_theme');
 add_action('widgets_init', 'bootkit_widgets');
 add_action('customize_register', 'bootkit_customize_register');
 add_action( 'after_setup_theme', 'register_navwalker' );
+add_action('init', 'bootkit_taxonomies');
+add_action('init', 'bootkit_register_post_type_init');
 
 // Shortcodes
 function my_filter_function1($str)
@@ -32,6 +36,7 @@ function my_filter_function1($str)
 }
 
 add_filter('my_filter1', 'my_filter_function1');
+add_filter( 'pre_option_link_manager_enabled', '__return_true' );
 
 function my_filter_function2($str)
 {
@@ -55,3 +60,8 @@ add_filter('previous_posts_link_attributes', 'posts_link_attributes');
 function posts_link_attributes() {
   return 'class="page-link"';
 }
+
+function movie_custom_fields() {
+    add_post_type_support( 'movie', 'custom-fields');
+}
+add_action('init', 'movie_custom_fields');

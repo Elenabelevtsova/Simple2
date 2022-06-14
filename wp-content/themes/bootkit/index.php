@@ -22,7 +22,10 @@ get_header();?>
 }
 }
 ?>
-
+<!-- Post Content Column -->
+<div class="col-lg-12">
+    <!-- Title -->
+    <h1 class="mt-4 mb-3"><?php the_title()?></h1>
             <!-- Pagination -->
             <ul class="pagination justify-content-center mb-4">
                 <li class="page-item">
