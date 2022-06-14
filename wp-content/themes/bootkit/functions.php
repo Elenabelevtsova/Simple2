@@ -50,3 +50,8 @@ function my_time(){
     'https://fonts.googleapis.com/css?family=Open+Sans&display=swap', [], time()); 
 // Google fonts
 }
+add_filter('next_posts_link_attributes', 'posts_link_attributes');
+add_filter('previous_posts_link_attributes', 'posts_link_attributes');
+function posts_link_attributes() {
+  return 'class="page-link"';
+}
