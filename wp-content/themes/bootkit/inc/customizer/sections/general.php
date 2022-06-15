@@ -12,6 +12,7 @@ Kirki::add_field('sydney2021', array(
     'section' => 'general_settings',
     'default' => 'Sydney 2021',
 ));
+
 Kirki::add_field('theme_config_id', [
     'type' => 'color',
     'settings' => 'color_setting1',
@@ -27,7 +28,7 @@ Kirki::add_field('theme_config_id', [
 
         ],
     ],
-]); 
+]);
 Kirki::add_field('theme_config_id', [
     'type' => 'typography',
     'settings' => 'typography_setting_logo',
@@ -51,7 +52,6 @@ Kirki::add_field('theme_config_id', [
         ],
     ],
 ]);
-
 
 //Typography panel + sections
 Kirki::add_section('section_id', [

@@ -598,13 +598,11 @@ class WPCF7_Submission {
 
 
 	private function verify_nonce() {
-		if ( ! $this->contact_form->nonce_is_active() or ! is_user_logged_in() ) {
+		if ( ! $this->contact_form->nonce_is_active() ) {
 			return true;
 		}
 
-		$nonce = isset( $_POST['_wpnonce'] ) ? $_POST['_wpnonce'] : '';
-
-		return wpcf7_verify_nonce( $nonce );
+		return wpcf7_verify_nonce( $_POST['_wpnonce'] );
 	}
 
 

@@ -271,7 +271,7 @@ class Kirki extends Init {
 		// Convert css_vars to output args.
 		if ( isset( $args['css_vars'] ) ) {
 
-			if ( isset( $args['transport'] ) && 'postMessage' === $args['transport'] ) {
+			if ( 'postMessage' === $args['transport'] ) {
 				$args['transport'] = 'auto';
 			}
 

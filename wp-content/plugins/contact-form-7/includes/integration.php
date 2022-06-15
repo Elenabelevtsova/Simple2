@@ -1,9 +1,4 @@
 <?php
-/**
- * Integration API
- *
- * @link https://contactform7.com/integration-with-external-apis/
- */
 
 class WPCF7_Integration {
 
@@ -14,12 +9,6 @@ class WPCF7_Integration {
 
 	private function __construct() {}
 
-
-	/**
-	 * Returns initially supported service categories.
-	 *
-	 * @return array Service categories.
-	 */
 	public static function get_builtin_categories() {
 		return array(
 			'spam_protection' => __( 'Spam protection', 'contact-form-7' ),
@@ -28,12 +17,6 @@ class WPCF7_Integration {
 		);
 	}
 
-
-	/**
-	 * Returns the singleton instance of this class.
-	 *
-	 * @return WPCF7_Integration The instance.
-	 */
 	public static function get_instance() {
 		if ( empty( self::$instance ) ) {
 			self::$instance = new self;
@@ -43,10 +26,6 @@ class WPCF7_Integration {
 		return self::$instance;
 	}
 
-
-	/**
-	 * Adds a service to the services list.
-	 */
 	public function add_service( $name, WPCF7_Service $service ) {
 		$name = sanitize_key( $name );
 
@@ -58,10 +37,6 @@ class WPCF7_Integration {
 		$this->services[$name] = $service;
 	}
 
-
-	/**
-	 * Adds a service category to the categories list.
-	 */
 	public function add_category( $name, $title ) {
 		$name = sanitize_key( $name );
 
@@ -73,12 +48,6 @@ class WPCF7_Integration {
 		$this->categories[$name] = $title;
 	}
 
-
-	/**
-	 * Returns true if a service with the name exists in the services list.
-	 *
-	 * @param string $name The name of service to search.
-	 */
 	public function service_exists( $name = '' ) {
 		if ( '' == $name ) {
 			return (bool) count( $this->services );
@@ -87,14 +56,6 @@ class WPCF7_Integration {
 		}
 	}
 
-
-	/**
-	 * Returns a service object with the name.
-	 *
-	 * @param string $name The name of service.
-	 * @return WPCF7_Service|bool The service object if it exists,
-	 *                            false otherwise.
-	 */
 	public function get_service( $name ) {
 		if ( $this->service_exists( $name ) ) {
 			return $this->services[$name];
@@ -103,10 +64,6 @@ class WPCF7_Integration {
 		}
 	}
 
-
-	/**
-	 * Prints services list.
-	 */
 	public function list_services( $args = '' ) {
 		$args = wp_parse_args( $args, array(
 			'include' => array(),
@@ -160,54 +117,34 @@ class WPCF7_Integration {
 
 }
 
-
-/**
- * Abstract class for services.
- *
- * Only instances of this class's subclasses are allowed to be
- * listed on the Integration page.
- */
 abstract class WPCF7_Service {
 
 	abstract public function get_title();
 	abstract public function is_active();
 
-
 	public function get_categories() {
 		return array();
 	}
-
 
 	public function icon() {
 		return '';
 	}
 
-
 	public function link() {
 		return '';
 	}
 
-
 	public function load( $action = '' ) {
 	}
 
-
 	public function display( $action = '' ) {
 	}
-
 
 	public function admin_notice( $message = '' ) {
 	}
 
 }
 
-
-/**
- * Class for services that use OAuth.
- *
- * While this is not an abstract class, subclassing this class for
- * your aim is advised.
- */
 class WPCF7_Service_OAuth2 extends WPCF7_Service {
 
 	protected $client_id = '';
@@ -217,34 +154,27 @@ class WPCF7_Service_OAuth2 extends WPCF7_Service {
 	protected $authorization_endpoint = 'https://example.com/authorization';
 	protected $token_endpoint = 'https://example.com/token';
 
-
 	public function get_title() {
 		return '';
 	}
-
 
 	public function is_active() {
 		return ! empty( $this->refresh_token );
 	}
 
-
 	protected function save_data() {
 	}
 
-
 	protected function reset_data() {
 	}
-
 
 	protected function get_redirect_uri() {
 		return admin_url();
 	}
 
-
 	protected function menu_page_url( $args = '' ) {
 		return menu_page_url( 'wpcf7-integration', false );
 	}
-
 
 	public function load( $action = '' ) {
 		if ( 'auth_redirect' == $action ) {
@@ -271,7 +201,6 @@ class WPCF7_Service_OAuth2 extends WPCF7_Service {
 		}
 	}
 
-
 	protected function authorize( $scope = '' ) {
 		$endpoint = add_query_arg(
 			array(
@@ -288,7 +217,6 @@ class WPCF7_Service_OAuth2 extends WPCF7_Service {
 		}
 	}
 
-
 	protected function get_http_authorization_header( $scheme = 'basic' ) {
 		$scheme = strtolower( trim( $scheme ) );
 
@@ -302,7 +230,6 @@ class WPCF7_Service_OAuth2 extends WPCF7_Service {
 				);
 		}
 	}
-
 
 	protected function request_token( $authorization_code ) {
 		$endpoint = add_query_arg(
@@ -351,7 +278,6 @@ class WPCF7_Service_OAuth2 extends WPCF7_Service {
 		return $response;
 	}
 
-
 	protected function refresh_token() {
 		$endpoint = add_query_arg(
 			array(
@@ -396,7 +322,6 @@ class WPCF7_Service_OAuth2 extends WPCF7_Service {
 		return $response;
 	}
 
-
 	protected function remote_request( $url, $request = array() ) {
 		static $refreshed = false;
 
@@ -421,7 +346,6 @@ class WPCF7_Service_OAuth2 extends WPCF7_Service {
 
 		return $response;
 	}
-
 
 	protected function log( $url, $request, $response ) {
 		wpcf7_log_remote_request( $url, $request, $response );

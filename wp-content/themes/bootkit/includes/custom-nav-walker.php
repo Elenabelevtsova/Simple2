@@ -1,12 +1,4 @@
 <?php
-/**
-* Register Custom Navigation Walker
-*/
-function register_navwalker()
-{
-    require_once get_template_directory() . '/includes/class-wp-bootstrap-navwalker.php';
-}
-
 class Bootkit_Nav_Walker extends Walker_Nav_Menu
 {
     public function start_lvl(&$output, $depth = 0, $args = array())

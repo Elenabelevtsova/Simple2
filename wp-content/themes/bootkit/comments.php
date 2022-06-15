@@ -4,46 +4,39 @@
 ?>
 <!-- Comments Form -->
 <div class="card my-4">
-    <!-- <h5 class="card-header">Leave a Comment:</h5> -->
+    <h5 class="card-header">Leave a Comment:</h5>
     <div class="card-body">
-        <!-- <form>
-                   <div class="form-group">
-                       <textarea class="form-control" rows="3"></textarea>
-                   </div>
-                   <button type="submit" class="btn btn-primary">Submit</button>
-               </form> -->
         <?php comment_form([
     'comment_field' => '<div class="form-group">
     <textarea name="comment" cols="58" rows="3" class="form-control"></textarea>
 </div>',
-
     'fields' => [
         'author' =>
         '<div class="col col-sm-4">
-            <label>' . __('Name', 'bootstraptopic') . '</label>
+            <label>' . __('Name', 'bootkit') . '</label>
             <input type="text" name="author" class="form-control" />
         </div>',
         'email' =>
         '<div class="col col-sm-4">
-            <label>' . __('Email', 'bootstraptopic') . '</label>
+            <label>' . __('Email', 'bootkit') . '</label>
             <input type="text" name="email" class="form-control" />
         </div>',
         'url' =>
         '<div class="col col-sm-4">
-            <label>' . __('Website', 'bootstraptopic') . '</label>
+            <label>' . __('Website', 'bootkit') . '</label>
             <input type="text" name="url" class="form-control" />
         </div>',
     ],
     'class_submit' => 'btn btn-primary',
-    'label_submit' => __('Submit Comment', 'bootstraptopic'),
-    'title_reply' => __('<h5 class="card-header">Leave a Comment</span>:', 'bootstraptopic'),
+    'label_submit' => __('Submit Comment', 'bootkit'),
+    'title_reply' => __('', 'bootkit'),
 ]
-);?>
+);
+?>
     </div>
 </div>
 <?php
-if (have_comments()) {
-    ?>
+if (have_comments()) {?>
 <h5 class="comments-title"><span><?php comments_number();?></span></h5>
 <!-- Comments List -->
 
@@ -61,21 +54,20 @@ if (have_comments()) {
     </div>
     <div class="comment-content clearfix">
         <div class="comment-author">
-            <?php comment_author();?>
+            <h5 class="mt-0"> <?php comment_author();?></h5>
             <span><?php comment_date();?></span>
         </div>
         <div class="media-body">
             <?php comment_text();?>
         </div>
-    </div>
 
+    </div>
 </div>
 <?php
 }
     the_comments_pagination();
     ?>
-<!-- .commentlist end -->
 <?php
 }
-
 ?>
+<!-- .commentlist end -->
