@@ -985,3 +985,6 @@ a.more-link:focus {
 .dropdown-toggle b.caret {
   display: none;
 }
+.entry-footer{
+	height: 10px;
+}

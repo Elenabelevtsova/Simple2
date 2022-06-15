@@ -904,6 +904,7 @@ template {
 	margin-left: auto;
 	margin-bottom: var(--global--spacing-vertical);
 	margin-right: auto;
+	width: 10px;
 }
 
 /*

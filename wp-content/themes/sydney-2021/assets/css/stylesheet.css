@@ -830,8 +830,7 @@ a.bookNow:focus{
 footer{
     position: relative;
     width:100%;
-    min-height: 890px;
-    background:#555658;
+    min-height: 90px;
 }
 .tittleBlock{
     font-size: 42px;
@@ -1344,8 +1343,7 @@ footer{
         transition: .2s;
         width: 230px;
         padding-top: 20px;
-        position: fixed;
-        :      
+        position: fixed;    
     }
     nav ul li a, nav ul li a:visited, nav ul li a:link {
         font-size: 12px;
