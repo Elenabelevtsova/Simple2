@@ -96,7 +96,7 @@ if (has_nav_menu('primary')) {
         </div>
     </header>
     <?php }?>
-   
+    <?php get_breadcrums();?>
     <div class="container">
         <?php if (get_theme_mod('bootkit_header_show_search')) {?>
         <!-- Top Search  ============================ -->
