@@ -26,7 +26,7 @@
         get_template_part('partials/posts/content', 'excerpt');
     }
 } else {
-    get_template_part('partials/posts/content', 'none');
+    get_template_part('template-parts/content', 'none');
 }
 ?>
 
