@@ -1,53 +1,52 @@
-<?php
-/**
- * The template for displaying search results pages
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#search-result
- *
- * @package Sydney_2021
- */
+<?php get_header("v2");?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1><?php _e('Search Results for:', 'bootkit');?> <?php the_search_query();?></h1>
+        </div>
+    </div>
+</div>
 
-get_header();
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Marketing Icons Section -->
+    <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+            <div class="card-header"><?php _e('What are you searhing for today?', 'bootkit');?></div>
+            <div class="card-body">
+                <?php get_search_form();?>
+            </div>
+            <?php if (have_posts()) {
+    while (have_posts()) {
+        the_post();
+        //get_template_part('partials/posts/content-excerpt');
+        get_template_part('partials/posts/content', 'excerpt');
+    }
+} else {
+    get_template_part('partials/posts/content', 'none');
+}
 ?>
 
-	<main id="primary" class="site-main">
+            <!-- Pagination -->
+            <ul class="pagination justify-content-center mb-4">
+                <li class="page-item">
+                    <?php previous_posts_link("&larr; Older");?>
+                    <!-- <a class="page-link" href="#">&larr; Older</a> -->
+                </li>
+                <li class="page-item">
+                    <?php next_posts_link("Newer &rarr;");?>
+                    <!-- <a class="page-link" href="#">Newer &rarr;</a> -->
+                </li>
+            </ul>
+        </div>
+        <?php get_sidebar();?>
+        <!-- /.row -->
 
-		<?php if ( have_posts() ) : ?>
+    </div>
+    <!-- /.container -->
 
-			<header class="page-header">
-				<h1 class="page-title">
-					<?php
-					/* translators: %s: search query. */
-					printf( esc_html__( 'Search Results for: %s', 'sydney-2021' ), '<span>' . get_search_query() . '</span>' );
-					?>
-				</h1>
-			</header><!-- .page-header -->
-
-			<?php
-			/* Start the Loop */
-			while ( have_posts() ) :
-				the_post();
-
-				/**
-				 * Run the loop for the search to output the results.
-				 * If you want to overload this in a child theme then include a file
-				 * called content-search.php and that will be used instead.
-				 */
-				get_template_part( 'template-parts/content', 'search' );
-
-			endwhile;
-
-			the_posts_navigation();
-
-		else :
-
-			get_template_part( 'template-parts/content', 'none' );
-
-		endif;
-		?>
-
-	</main><!-- #main -->
-get_sidebar();
-<?php
-
-get_footer();
+</div>
+<?php get_footer();?>

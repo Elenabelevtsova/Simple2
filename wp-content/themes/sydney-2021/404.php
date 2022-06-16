@@ -1,60 +1,46 @@
-<?php
-/**
- * The template for displaying 404 pages (not found)
- *
- * @link https://codex.wordpress.org/Creating_an_Error_404_Page
- *
- * @package Sydney_2021
- */
+<?php get_header("v2");?>
 
-get_header();
-?>
+<!-- Page Content -->
+<div class="container">
 
-	<main id="primary" class="site-main">
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">404
+        <small>
+            <?php _e("Page Not Found")?>
+        </small>
+    </h1>
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="index.html">Home</a>
+        </li>
+        <li class="breadcrumb-item active">404</li>
+    </ol>
+    <div class="jumbotron">
+        <h1 class="display-1">404</h1>
+        <p>
+            <?php _e("The page you're looking for could not be found")?>
+        </p>
+    </div>
+    <!-- /.jumbotron -->
+    <?php get_search_form(); ?>
+    <h2>Pages</h2>
+        <ul>
+            <?php wp_list_pages('title_li=');?>
+        </ul>
+        <h2>Posts</h2>
+        <?php
+$cats = get_categories();
+foreach ($cats as $cat) {
+    query_posts('posts_per_page=-1&cat=' . $cat->cat_ID);?>
+        <h3><?php echo $cat->cat_name; ?></h3>
+        <ul>
+            <?php while (have_posts()) {the_post();?>
+            <li><a href="<?php the_permalink();?>"><?php the_title();?></a></li>
+            <?php }
+    wp_reset_query();?>
+        </ul>
+        <?php }?>
+</div>
+<!-- /.container -->
 
-		<section class="error-404 not-found">
-			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'sydney-2021' ); ?></h1>
-			</header><!-- .page-header -->
-
-			<div class="page-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'sydney-2021' ); ?></p>
-
-					<?php
-					get_search_form();
-
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
-
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'sydney-2021' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories(
-								array(
-									'orderby'    => 'count',
-									'order'      => 'DESC',
-									'show_count' => 1,
-									'title_li'   => '',
-									'number'     => 10,
-								)
-							);
-							?>
-						</ul>
-					</div><!-- .widget -->
-
-					<?php
-					/* translators: %1$s: smiley */
-					$sydney_2021_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'sydney-2021' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$sydney_2021_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
-
-			</div><!-- .page-content -->
-		</section><!-- .error-404 -->
-
-	</main><!-- #main -->
-
-<?php
-get_footer();
+<?php get_footer();?>

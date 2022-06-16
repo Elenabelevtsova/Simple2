@@ -1,24 +1,35 @@
 <?php get_header("v2");?>
+<?php
+$categories = get_terms('category', 'orderby=name&hide_empty=0');
+      if ($categories) {
+            echo '<ul>';
+            foreach ($categories as $cat) {
+                // term_id - ID рубрики, а $cat->name - название рубрики
+                echo "<li value='{$cat->term_id}'>{$cat->name}</li>";
+          }
+           echo '</ul>';
+        }?>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h1><?php _e('Search Results for:', 'bootkit');?> </h1>
+            <!-- Title -->
+            <h1 class="mt-4 mb-3"><?php the_archive_title();?></h1>
+            <span><?php the_archive_description();?></span>
         </div>
     </div>
 </div>
-
 <!-- Page Content -->
 <div class="container">
 
+    <!-- <h1 class="my-4">Welcome to Modern Business</h1> -->
+
     <!-- Marketing Icons Section -->
     <div class="row">
-
         <!-- Blog Entries Column -->
         <div class="col-md-8">
-            <div class="card-header"><?php _e('What are you searhing for today?', 'bootkit');?></div>
-            <div class="card-body">
-                
-            </div>
+
+
+
             <?php if (have_posts()) {
     while (have_posts()) {
         the_post();
@@ -41,12 +52,12 @@
                     <!-- <a class="page-link" href="#">Newer &rarr;</a> -->
                 </li>
             </ul>
+
+
         </div>
         <?php get_sidebar();?>
         <!-- /.row -->
-
     </div>
     <!-- /.container -->
-
 </div>
 <?php get_footer();?>
