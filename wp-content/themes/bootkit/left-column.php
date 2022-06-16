@@ -9,7 +9,7 @@ get_header("v2");?>
 <!-- Page Content -->
 <div class="container">
     <div class="row">
-        <?php get_sidebar();?>
+        
         <!-- Post Content Column -->
         <div class="col-lg-8">
             <?php if (have_posts()) {

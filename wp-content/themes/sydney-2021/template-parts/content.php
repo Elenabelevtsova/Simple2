@@ -57,7 +57,7 @@
 		?>
 	</div><!-- .entry-content -->
 
-	<h4 class="entry-footer">
+	<footer class="entry-footer">
 		<?php sydney_2021_entry_footer(); ?>
-	</h4><!-- .entry-footer -->
+	</footer><!-- .entry-footer -->
 </article><!-- #post-<?php the_ID(); ?> -->

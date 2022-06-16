@@ -1,38 +1,99 @@
 <?php
-/**
- * The template for displaying all pages
- *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site may use a
- * different template.
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
- *
- * @package Sydney_2021
- */
+get_header("v2");?>
 
-get_header();
-?>
+<!-- Page Content -->
+<div class="container">
+    <div class="row">
 
-	<main id="primary" class="site-main">
+        <!-- Post Content Column -->
+        <div class="col-lg-8">
+            <?php if (have_posts()) {
+    while (have_posts()) {
+        the_post();
+        global $post;
+        $author_ID = $post->post_author;
+        $author_URL = get_author_posts_url($author_ID);
+        ?>
+            <!-- Title -->
+            <h1 class="mt-4"><?php the_title()?></h1>
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+            <!-- Post category: -->
+            <h2 class="mt-4"><?php the_category(" ")?></h2>
 
-			get_template_part( 'template-parts/content', 'page' );
+            <!-- Author -->
+            <p class="lead">
+                by
+                <a href="<?php echo $author_URL; ?>"><?php the_author();?></a>
+            </p>
+            <hr>
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+            <!-- Date/Time -->
+            <p><?php the_time(get_option('date_format'));
+        echo " ";
+        the_time(get_option('time_format'));?></p>
+            <hr>
 
-		endwhile; // End of the loop.
-		?>
+            <!-- Preview Image -->
+            <?php
+if (has_post_thumbnail()) {
+            the_post_thumbnail("full", ["class" => "card-img-top"]);
+        }
+        ?>
+            <hr>
 
-	</main><!-- #main -->
+            <!-- Post Content -->
+            <?php the_content();
+        $defaults = array(
+            'before' => '<div class="row justify-content-center align-items-center">' . __('Pages:'),
+            'after' => '</div>',
+        );
+        wp_link_pages($defaults);
+        edit_post_link();
+        ?>
+            <hr>
 
-<?php
-get_sidebar();
-get_footer();
+            <!-- Tag cloud -->
+            <?php the_tags('', ', ');?>
+            <hr>
+
+
+            <!-- Post Author Info -->
+            <div class="card">
+                <div class="card-header">
+                    <strong>
+                        Posted by
+                        <a href="<?php echo $author_URL; ?>"><?php the_author();?></a>
+                    </strong>
+                </div>
+                <div class="card-body">
+                    <div class="author-image">
+                        <?php echo get_avatar($author_ID, 90, '', false, ['class' => 'img-circle']); ?>
+                    </div>
+                    <?php echo nl2br(get_the_author_meta('description')); ?>
+                </div>
+            </div><!-- Post Single - Author End -->
+
+
+            <?php
+if (comments_open() || get_comments_number()) {
+            comments_template();
+        }
+        ?>
+            <?php
+}
+}?>
+        </div>
+        <?php get_sidebar();?>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <ul>
+        <li><strong>Director:</strong> <?php the_field('movie_director');?></li>
+        <li><strong>Release Year:</strong> <?php the_field('release_year');?></li>
+        <li><strong>Movie Rating:</strong> <?php the_field('movie_rating');?>/10</li>
+    </ul>
+
+</div>
+<?php get_footer();?>
