@@ -1,17 +1,16 @@
-<?php
-/**
- * The sidebar containing the main widget area
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package Sydney_2021
- */
+ <!-- Sidebar Widgets Column -->
+ <div class="col-md-4">
+ <?php get_search_form();?>
 
-if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-	return;
-}
-?>
 
-<aside id="secondary" class="widget-area">
-	<?php dynamic_sidebar( 'sidebar-1' ); ?>
-</aside><!-- #secondary -->
+     <?php if (is_active_sidebar('bootkit_sidebar')) {
+    dynamic_sidebar('bootkit_sidebar');
+}?>
+     <div class="my-new-sidebar">
+
+         <?php if (!function_exists('dynamic_sidebar') || !dynamic_sidebar("Sidebar Area")): ?>
+
+         <?php endif;?>
+
+     </div> <?php get_calendar();?>
+ </div>
