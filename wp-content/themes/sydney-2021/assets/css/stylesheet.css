@@ -831,7 +831,7 @@ footer{
     position: relative;
     width:100%;
     min-height: 890px;
-    background:#555658;
+    background:#4b4c4e;
 }
 .tittleBlock{
     font-size: 42px;
@@ -1345,7 +1345,7 @@ footer{
         width: 230px;
         padding-top: 20px;
         position: fixed;
-        :      
+        
     }
     nav ul li a, nav ul li a:visited, nav ul li a:link {
         font-size: 12px;
