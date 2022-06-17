@@ -41,7 +41,7 @@ if (!class_exists('kit_Walker_Comment')) {
             ?>
 			<<?php echo $tag; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- static output  ?> id="comment-<?php comment_ID();?>" <?php comment_class($this->has_children ? 'parent' : '', $comment);?>>
 				<article id="div-comment-<?php comment_ID();?>" class="comment-body">
-					<footer class="comment-meta">
+					<h4 class="comment-meta">
 						<div class="comment-author vcard">
 							<?php
 $comment_author_url = get_comment_author_url($comment);
@@ -91,7 +91,7 @@ $comment_author_url = get_comment_author_url($comment);
             ?>
 						</div><!-- .comment-metadata -->
 
-					</footer><!-- .comment-meta -->
+        </h4><!-- .comment-meta -->
 
 					<div class="comment-content entry-content">
 

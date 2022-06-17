@@ -421,7 +421,7 @@ class Walker_Comment extends Walker {
 		?>
 		<<?php echo $tag; ?> id="comment-<?php comment_ID(); ?>" <?php comment_class( $this->has_children ? 'parent' : '', $comment ); ?>>
 			<article id="div-comment-<?php comment_ID(); ?>" class="comment-body">
-				<footer class="comment-meta">
+				<h4 class="comment-meta">
 					<div class="comment-author vcard">
 						<?php
 						if ( 0 != $args['avatar_size'] ) {
@@ -464,7 +464,7 @@ class Walker_Comment extends Walker {
 					<?php if ( '0' == $comment->comment_approved ) : ?>
 					<em class="comment-awaiting-moderation"><?php echo $moderation_note; ?></em>
 					<?php endif; ?>
-				</footer><!-- .comment-meta -->
+					</h4><!-- .comment-meta -->
 
 				<div class="comment-content">
 					<?php comment_text(); ?>
